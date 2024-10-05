@@ -5,16 +5,19 @@ import (
 )
 
 func Distance(a, b string) (int, error) {
-	res := 0
+	distance := 0
 	if len(a) != len(b) {
 		return 0, errors.New("inputs are not the same length")
 	}
-	for i, _ := range a {
-		if a[i] != b[i] {
-			res++
+	runes1 := []rune(a)
+	runes2 := []rune(b)
+
+	for i, runee := range runes1 {
+		if runee != runes2[i] {
+			distance++
 		}
 
 	}
 
-	return res, nil
+	return distance, nil
 }
