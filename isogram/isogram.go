@@ -1,15 +1,22 @@
 package isogram
 
-import "strings"
+import "unicode"
+
+type empty struct{}
 
 func IsIsogram(word string) bool {
-	word = strings.ToLower(word)
-	for i := 0; i < len(word); i++ {
-		if word[i] != '-' && word[i] != ' ' {
-			if strings.Count(word, string(word[i])) > 1 {
+
+	checked := map[rune]empty{}
+
+	for _, ch := range word {
+		letter := unicode.ToLower(ch)
+		if unicode.IsLetter(ch) {
+			if _, ok := checked[letter]; ok {
 				return false
 			}
 		}
+		checked[letter] = empty{}
 	}
+
 	return true
 }
